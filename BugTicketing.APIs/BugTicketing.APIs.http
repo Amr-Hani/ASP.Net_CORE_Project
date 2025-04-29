@@ -1,0 +1,86 @@
+@BugTicketing.APIs_HostAddress = http://localhost:5109/api
+### User End Points ---------------------------------------------------------------------------------------------
+GET {{BugTicketing.APIs_HostAddress}}/users/
+Accept: application/json
+
+
+###
+POST {{BugTicketing.APIs_HostAddress}}/users/register/
+Content-Type: application/json
+{
+   "Username": "3laaEisa",
+   "Password": "Am#123456",
+   "Email": "3laaeisa@gmail.com",
+   "Role": "Developer"
+}
+
+###
+POST {{BugTicketing.APIs_HostAddress}}/users/login
+Content-Type: application/json
+{
+   "Email": "3laaeisa@gmail.com",
+   "Password": "Am#123456"
+}
+### Project End Points ---------------------------------------------------------------------------------------------
+###
+POST {{BugTicketing.APIs_HostAddress}}/projects/
+Content-Type: application/json
+{
+   "Project_Name": "APIs",
+   "Project_Description": "Five Entity",
+   "Project_Version": "V1"
+}
+
+###
+GET {{BugTicketing.APIs_HostAddress}}/projects/
+Accept: application/json
+
+###
+GET {{BugTicketing.APIs_HostAddress}}/projects/962c9d6f-1db1-4df3-ac61-08dd85a0d2ed
+Accept: application/json
+### Bugs End Points ---------------------------------------------------------------------------------------------
+###
+POST {{BugTicketing.APIs_HostAddress}}/bugs/
+Content-Type: application/json
+{
+   "Bug_Name": "new bug",
+   "Bug_Description": "new bug add now",
+   "Bug_Type":"not ype",
+   "priority":0,
+   "Status":0,
+   "Project_Id":"962c9d6f-1db1-4df3-ac61-08dd85a0d2ed"
+}
+
+###
+GET {{BugTicketing.APIs_HostAddress}}/bugs/
+Accept: application/json
+
+###
+GET {{BugTicketing.APIs_HostAddress}}/bugs/bugid
+Accept: application/json
+
+### Bugs End Points ---------------------------------------------------------------------------------------------
+###
+POST {{BugTicketing.APIs_HostAddress}}/userbugs/bugid
+Content-Type: application/json
+{
+   "User_Id": "1cc0a880-fdbe-40e0-abed-8b9a229e62ca"
+}
+
+###
+DELETE {{BugTicketing.APIs_HostAddress}}/userbugs/bugid/1cc0a880-fdbe-40e0-abed-8b9a229e62ca
+Accept: application/json 
+
+
+
+
+
+
+
+###
+GET {{BugTicketing.APIs_HostAddress}}/bugs/
+Accept: application/json
+
+###
+GET {{BugTicketing.APIs_HostAddress}}/bugs/bugid
+Accept: application/json
