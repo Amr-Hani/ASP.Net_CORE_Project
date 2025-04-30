@@ -21,8 +21,6 @@ namespace BugTicketing.BL
                               UserManager<User> userManager,
                               IConfiguration configuration,
                               IValidator<Register> validator
-
-
             )
         {
             this.unitOfWork = unitOfWork;
@@ -54,7 +52,7 @@ namespace BugTicketing.BL
             {
                 UserName = register.Username,
                 Email = register.Email,
-                Role = Enum.Parse<UserEnum>(register.Role)
+                Role = Enum.Parse<UserEnum>(register.Role.Trim(), ignoreCase: true)
             };
 
             var creationResult = await userManager.CreateAsync(user, register.Password);

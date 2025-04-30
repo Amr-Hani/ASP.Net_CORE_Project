@@ -26,7 +26,7 @@ namespace BugTicketing.BL
               .WithMessage("This Email already Exists");
 
             RuleFor(u => u.Role)
-              .IsInEnum()
+              .IsEnumName(typeof(UserEnum))
               .WithMessage("Invalid role selected");
 
             RuleFor(u => u.Password)

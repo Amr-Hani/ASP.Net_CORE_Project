@@ -40,9 +40,18 @@ namespace BugTicketing.BL.Mangers.BugManger
                 Status = BugStatus.InProcess,
                 Project_Id = bugAddDto.Project_Id,
             };
+            bool flag = true;
+            do
+            {
+                var oldBug = await unitOfWork.BugRepo.GetByIdAsync(bug.Bug_Id);
+                if (oldBug == null)
+                {
+                    flag = false;
+                    break;
+                }
+                bug.Bug_Id = Guid.NewGuid().ToString();
+            } while (flag);
 
-            if(unitOfWork is null) Console.WriteLine("unit of work is null");
-            if(unitOfWork.BugRepo is null) Console.WriteLine("unit of work is null");
             unitOfWork.BugRepo.Add(bug);
           
             var result = await unitOfWork.SaveChangesAsync();
@@ -74,8 +83,8 @@ namespace BugTicketing.BL.Mangers.BugManger
                 Bug_Description = bug.Bug_Description,
                 Bug_Name = bug.Bug_Name,
                 Bug_Id = bug.Bug_Id,
-                Status = bug.Status,
-                priority = bug.priority
+                Status = ((BugStatus)bug.Status).ToString(),
+                priority = ((BugPriority)bug.priority).ToString()
             }).ToList();
 
             return new GeneralResult<List<BugShowDto>>
@@ -90,17 +99,16 @@ namespace BugTicketing.BL.Mangers.BugManger
             var bug = await unitOfWork.BugRepo.GetBugByIdWithDetailsAsync(id);
             return new GeneralResult<ShowBugWithDetails>
             {
-                Status = true
-                ,
+                Status = true,
                 Data = new ShowBugWithDetails
                 {
                     Bug_Description = bug.Bug_Description,
-                    Status = bug.Status,
                     Bug_Id = bug.Bug_Id,
                     Bug_Name = bug.Bug_Name,
                     Bug_Type = bug.Bug_Type,
                     CreatedAt = bug.CreatedAt,
-                    priority = bug.priority,
+                    Status = ((BugStatus)bug.Status).ToString(),
+                    priority = ((BugPriority)bug.priority).ToString(),
                     AttachmentBugs = bug.Attachments.Select(ba => new AttachmentBug
                     {
                         Attachment_Name = ba.Attachment_Name,
