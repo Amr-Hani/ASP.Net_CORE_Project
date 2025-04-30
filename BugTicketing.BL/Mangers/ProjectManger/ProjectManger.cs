@@ -63,6 +63,7 @@ namespace BugTicketing.BL
             var projects = await unitOfWork.ProjectRepo.GetAllAsync();
             var projectDto = projects.Select(p => new ProjectShowDto
             {
+                Project_Id = p.Project_Id,
                 Project_Description = p.Project_Description,
                 Project_Name = p.Project_Name,
                 Project_Version = p.Project_Version,

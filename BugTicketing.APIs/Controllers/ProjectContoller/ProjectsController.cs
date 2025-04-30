@@ -38,7 +38,7 @@ namespace BugTicketing.APIs.Controllers.ProjectContoller
         
         [HttpGet]
         [Route("{id}")]
-        //[Authorize]
+        [Authorize]
         public async Task<Ok<GeneralResult<ProjectShowWithDetailsDto>>> GetByIdWithDetailsAll(Guid id)
         {
             var result = await projectManger.GetByIdWithDetailsAsync(id);

@@ -15,8 +15,8 @@ namespace BugTicketing.BL
         public string Bug_Description { get; set; } = string.Empty;
         public string Bug_Type { get; set; } = string.Empty;
 
-        public BugPriority priority { get; set; }
-        public BugStatus Status { get; set; }
+        public string priority { get; set; }
+        public string Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public List<UserBug> UserBugs { get; set; } = [];
         public List<AttachmentBug> AttachmentBugs { get; set; } = [];

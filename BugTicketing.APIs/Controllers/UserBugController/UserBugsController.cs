@@ -16,37 +16,7 @@ namespace BugTicketing.APIs.Controllers.UserBugController
         {
             this.userBugMangerRepo = userBugMangerRepo;
         }
-        [HttpPost]
-        [Route("{id}")]
-        public async Task<Results<Ok<GeneralResult>, BadRequest<GeneralResult>, NotFound<GeneralResult>>> Add(string id,UserBugAddDto userBugAddDto)
-        {
-            var result = await userBugMangerRepo.AddAsync(id,userBugAddDto);
-            if (result.Status)
-            {
-                return TypedResults.Ok(result);
-            }
-            if (result.Status && result.Errors[0].Code == "404")
-            {
-                return TypedResults.NotFound(result);
-            }
-            return TypedResults.BadRequest(result);
-        }
         
-        [HttpDelete]
-        [Route("{bugId}/{userId}")]
-        public async Task<Results<Ok<GeneralResult>, BadRequest<GeneralResult>, NotFound<GeneralResult>>> Delete(string bugId,string userId)
-        {
-            var result = await userBugMangerRepo.DeleteAsync(bugId,userId);
-            if (result.Status)
-            {
-                return TypedResults.Ok(result);
-            }
-            if (result.Status && result.Errors[0].Code == "404")
-            {
-                return TypedResults.NotFound(result);
-            }
-            return TypedResults.BadRequest(result);
-        }
 
 
     }
